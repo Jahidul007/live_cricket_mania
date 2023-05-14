@@ -13,9 +13,9 @@ mixin FixturesMatchesMixin on BaseController {
 
   final HomeRepository homeRepository = HomeRepository();
 
-  void getFixturesMatches() async {
+  Future<void> getFixturesMatches({String? dateTime}) async {
     showLoadingState();
-    var response = await homeRepository.getFixtureMatches();
+    var response = await homeRepository.getFixtureMatches(dateTime: dateTime);
     handleApiCall(response, onSuccess: _onFeaturedMatchesSuccess);
   }
 

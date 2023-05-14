@@ -1,3 +1,4 @@
+import 'package:cricket_mania/app/module/dashboard/data/model/series_response.dart';
 import 'package:cricket_mania/app/module/dashboard/screen/dashboard_screen.dart';
 import 'package:cricket_mania/app/module/fixtures/screen/fixtures_screen.dart';
 import 'package:cricket_mania/app/module/match_results/screen/match_results_screen.dart';
@@ -39,9 +40,15 @@ MaterialPageRoute? getCricketManiaAppRoutes(RouteSettings settings) {
       );
 
     case CricketManiaAppRoute.seriesScreen:
+      List<Series>? series;
+      if (args is List<Series>) {
+        series = args;
+      }
       return MaterialPageRoute(
         settings: const RouteSettings(name: CricketManiaAppRoute.seriesScreen),
-        builder: (_) => const SeriesScreen(),
+        builder: (_) => SeriesScreen(
+          series: series!,
+        ),
       );
 
     case CricketManiaAppRoute.fixturesScreen:

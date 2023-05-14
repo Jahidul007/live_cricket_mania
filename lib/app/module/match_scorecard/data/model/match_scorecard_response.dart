@@ -159,7 +159,7 @@ class LiveDetails {
   Officials? officials;
   List<Scorecard>? scorecard;
   Stats? stats;
-  String? teamsheets;
+  Teamsheets? teamsheets;
 
   LiveDetails(
       {this.matchSummary,
@@ -182,7 +182,9 @@ class LiveDetails {
       });
     }
     stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null;
-    teamsheets = json['teamsheets'];
+    teamsheets = json['teamsheets'] != null
+        ? Teamsheets.fromJson(json['teamsheets'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -621,6 +623,60 @@ class Last18Balls {
     data['isOverEnd'] = isOverEnd;
     data['isWide'] = isWide;
     data['runs'] = runs;
+    return data;
+  }
+}
+class Teamsheets {
+  List<PlayerHome>? home;
+  List<PlayerHome>? away;
+
+  Teamsheets({this.home, this.away});
+
+  Teamsheets.fromJson(Map<String, dynamic> json) {
+    if (json['home'] != null) {
+      home = <PlayerHome>[];
+      json['home'].forEach((v) {
+        home!.add( PlayerHome.fromJson(v));
+      });
+    }
+    if (json['away'] != null) {
+      away = <PlayerHome>[];
+      json['away'].forEach((v) {
+        away!.add( PlayerHome.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (home != null) {
+      data['home'] = home!.map((v) => v.toJson()).toList();
+    }
+    if (away != null) {
+      data['away'] = away!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class PlayerHome {
+  int? playerId;
+  String? playerName;
+  String? position;
+
+  PlayerHome({this.playerId, this.playerName, this.position});
+
+  PlayerHome.fromJson(Map<String, dynamic> json) {
+    playerId = json['player_id'];
+    playerName = json['player_name'];
+    position = json['position'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['player_id'] = playerId;
+    data['player_name'] = playerName;
+    data['position'] = position;
     return data;
   }
 }

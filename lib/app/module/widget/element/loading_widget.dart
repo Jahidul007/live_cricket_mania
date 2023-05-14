@@ -1,3 +1,4 @@
+import 'package:cricket_mania/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -9,7 +10,7 @@ Widget showLoading(BuildContext context) {
     child: const Center(
       child: SpinKitCircle(
         size: 50,
-        color: Color(0xff800080),
+        color: primaryColor,
       ),
     ),
   );

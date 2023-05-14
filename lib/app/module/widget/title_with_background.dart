@@ -3,12 +3,14 @@ import 'package:cricket_mania/app/utils/constants.dart';
 
 class TitleWithBackground extends StatelessWidget {
   final String title;
+  final String? subTitle;
   final Color? bgColor;
   final double? radius;
 
   const TitleWithBackground({
     Key? key,
     required this.title,
+    this.subTitle,
     this.bgColor = primaryColor,
     this.radius = 8,
   }) : super(key: key);
@@ -18,10 +20,20 @@ class TitleWithBackground extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(8),
-      child: Text(
-        title,
-        style: body2regular,
-        textAlign: TextAlign.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: body2regular,
+            textAlign: TextAlign.start,
+          ),
+          Text(
+            subTitle??'',
+            style: body2regular,
+            textAlign: TextAlign.start,
+          ),
+        ],
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius!),

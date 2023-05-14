@@ -1,4 +1,3 @@
-
 import 'package:cricket_mania/app/module/core/controller/base_controller.dart';
 import 'package:cricket_mania/app/module/core/model/base_response.dart';
 import 'package:cricket_mania/app/module/dashboard/data/model/series_response.dart';
@@ -9,12 +8,11 @@ mixin SeriesMixin on BaseController {
   final BehaviorSubject<SeriesResponse?> _seriesController =
       BehaviorSubject<SeriesResponse?>();
 
-  Stream<SeriesResponse?> get topUsersStream => _seriesController.stream;
-
+  Stream<SeriesResponse?> get seriesStream => _seriesController.stream;
 
   final HomeRepository homeRepository = HomeRepository();
 
-  void getSeries() async {
+  Future<void> getSeries() async {
     showLoadingState();
     var _topRepositories = await homeRepository.getAllSeries();
     handleApiCall(_topRepositories, onSuccess: _onSeriesSuccess);
@@ -28,8 +26,6 @@ mixin SeriesMixin on BaseController {
       _seriesController.sink.add(topUserResponse);
     }
   }
-
-
 
   @override
   void dispose() {

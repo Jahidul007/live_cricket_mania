@@ -14,7 +14,7 @@ mixin MatchResultsMixin on BaseController{
   final MatchResultsRepository _matchResultsRepository =
   MatchResultsRepository();
 
-  void getMatchResults({String? dateTime}) async {
+  Future<void> getMatchResults({String? dateTime}) async {
     showLoadingState();
     var response =
     await _matchResultsRepository.getMatchResults(dateTime: dateTime);
