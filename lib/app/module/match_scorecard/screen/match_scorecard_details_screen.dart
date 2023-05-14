@@ -131,12 +131,14 @@ class _MatchScorecardDetailsScreenState
                     ItemWithValue(
                         getDisplayText(
                             "${matchScorecardResponse.results?.fixture?.home?.name}"),
-                        "${matchScorecardResponse.results?.liveDetails?.matchSummary?.homeScores}"),
+                        getDisplayText(
+                            "${matchScorecardResponse.results?.liveDetails?.matchSummary?.homeScores}")),
                     customHeight(),
                     ItemWithValue(
                         getDisplayText(
                             "${matchScorecardResponse.results?.fixture?.away?.name}"),
-                        "${matchScorecardResponse.results?.liveDetails?.matchSummary?.awayScores}"),
+                        getDisplayText(
+                            "${matchScorecardResponse.results?.liveDetails?.matchSummary?.awayScores}")),
                     customHeight(),
                     Text(
                       getDisplayText(
