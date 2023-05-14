@@ -1,0 +1,56 @@
+name: cricket_mania
+description: Cricket Mania is a cricket live score Application. Get Live Cricket Scores, Scorecard, Schedules of International and Domestic cricket matches.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.2 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  rxdart: ^0.27.3
+  dio: ^4.0.6
+  http: ^0.13.4
+  pretty_dio_logger: ^1.1.1
+  logger: ^1.1.0
+  fluttertoast: ^8.0.8
+  connectivity: ^3.0.6
+  flutter_svg: ^1.0.3
+  flutter_spinkit: ^5.1.0
+  intl: ^0.17.0
+  flutter_secure_storage: ^7.0.0
+  shimmer: ^2.0.0
+  cached_network_image: ^3.2.0
+  dropdown_search: ^5.0.6
+  carousel_slider: ^4.2.1
+
+  mocktail: ^0.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+  build_runner: ^2.2.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Archivo
+      fonts:
+        - asset: fonts/Archivo-Regular.ttf
+          weight: 400
+        - asset: fonts/Archivo-Medium.ttf
+          weight: 200
+        - asset: fonts/Archivo-SemiBold.ttf
+          weight: 500
+        - asset: fonts/Archivo-Bold.ttf
+          weight: 700
+
+
