@@ -2,15 +2,24 @@
 
 Cricket Mania is a cricket live score Application. Get Live Cricket Scores, Scorecard, Schedules of International and Domestic cricket matches.
 
-## Getting Started
+### How to run
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+###### Prerequisite
+- Flutter 3.7.3 (Stable)
+- Dart 2.19.2
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+###### Build
+```
+$ flutter build apk --release
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+###### Run
+```
+$ flutter run 
+```
+
+### Cricket live api documentations
+```
+https://rapidapi.com/sportcontentapi/api/cricket-live-data/
+```
