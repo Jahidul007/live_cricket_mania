@@ -2,7 +2,6 @@ import 'package:cricket_mania/app/module/core/screen/base_page_screen.dart';
 import 'package:cricket_mania/app/module/core/screen/base_screen.dart';
 import 'package:cricket_mania/app/module/dashboard/data/model/series_response.dart';
 import 'package:cricket_mania/app/module/series/controller/series_controller.dart';
-import 'package:cricket_mania/app/module/widget/custom_divider.dart';
 import 'package:cricket_mania/app/module/widget/custom_height_width.dart';
 import 'package:cricket_mania/app/module/widget/item_with_value.dart';
 import 'package:cricket_mania/app/utils/constants.dart';

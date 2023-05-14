@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cricket_mania/app/module/common/widget/custom_card.dart';
 import 'package:cricket_mania/app/module/dashboard/controller/home_controller.dart';
 import 'package:cricket_mania/app/module/common/data/model/match_info_response.dart';
-import 'package:cricket_mania/app/module/dashboard/screen/widget/featured_match/featured_matches_card.dart';
+import 'package:cricket_mania/app/module/widget/app_chip.dart';
 import 'package:cricket_mania/app/utils/constants.dart';
+import 'package:cricket_mania/route/cricket_mania_app_route.dart';
 import 'package:flutter/material.dart';
 
 const double degreeToKmConstant = 0.2;
@@ -22,10 +24,10 @@ class FeaturedMatchesWidget extends StatefulWidget {
 class _FeaturedMatchesWidgetState extends State<FeaturedMatchesWidget> {
   @override
   Widget build(BuildContext context) {
-    return _getStationList();
+    return _getFeaturedMatchList();
   }
 
-  Widget _getStationList() {
+  Widget _getFeaturedMatchList() {
     return StreamBuilder(
       stream: widget.controller.fixturesMatchStream,
       builder: (context, AsyncSnapshot<MatchInfoResponse?> snapshot) {
@@ -39,9 +41,21 @@ class _FeaturedMatchesWidgetState extends State<FeaturedMatchesWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Matches",
-                style: recentCardTitleStyle,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Matches",
+                    style: recentCardTitleStyle,
+                  ),
+                  RectangularChip(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, CricketManiaAppRoute.fixturesScreen);
+                    },
+                    title: "View All",
+                  )
+                ],
               ),
               const SizedBox(height: 8),
               getCarouselWidget(results),
@@ -62,37 +76,41 @@ class _FeaturedMatchesWidgetState extends State<FeaturedMatchesWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4.0),
       ),
-      child: results.length == 1
-          ? SizedBox(
-              height: 120,
-              child: FeaturedMatchCard(
-                results: results.first,
-              ),
-            )
-          : CarouselSlider(
-              key: _globalKey,
-              disableGesture: false,
-              carouselController: buttonCarouselController,
-              options: CarouselOptions(
-                enlargeCenterPage: false,
-                scrollDirection: Axis.horizontal,
-                initialPage: 0,
-                height: 130,
-                // viewportFraction: 0.90,
-                padEnds: false,
-                autoPlay: true,
-                onPageChanged: (value, reason) {
-                  widget.controller.updateActivePage(value);
-                },
-              ),
-              items: List<Widget>.generate(
-                results.length,
-                (index) {
-                  return FeaturedMatchCard(
-                    results: results[index],
-                  );
-                },
-              ),
+      child: results.isNotEmpty
+          ? results.length == 1
+              ? SizedBox(
+                  height: 120,
+                  child: CustomCardWidget(
+                    results: results.first,
+                  ),
+                )
+              : CarouselSlider(
+                  key: _globalKey,
+                  disableGesture: false,
+                  carouselController: buttonCarouselController,
+                  options: CarouselOptions(
+                    enlargeCenterPage: false,
+                    scrollDirection: Axis.horizontal,
+                    initialPage: 0,
+                    height: 130,
+                    // viewportFraction: 0.90,
+                    padEnds: false,
+                    autoPlay: true,
+                    onPageChanged: (value, reason) {
+                      widget.controller.updateActivePage(value);
+                    },
+                  ),
+                  items: List<Widget>.generate(
+                    results.length,
+                    (index) {
+                      return CustomCardWidget(
+                        results: results[index],
+                      );
+                    },
+                  ),
+                )
+          : const Center(
+              child: Text("There is no live Match"),
             ),
     );
   }

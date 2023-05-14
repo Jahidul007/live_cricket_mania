@@ -3,61 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:cricket_mania/app/module/dashboard/controller/home_controller.dart';
 import 'package:cricket_mania/app/module/dashboard/data/enum/menu_item_type.dart';
 
-showMenuDialog(BuildContext context, HomeController homeController) {
-  return showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) {
-      return AlertDialog(
-        insetPadding: const EdgeInsets.all(20),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Filter'),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Icon(Icons.cancel_outlined),
-            )
-          ],
-        ),
-        actions: [
-          StreamBuilder<MenuItemType>(
-            stream: homeController.menuItemStream,
-            builder: (context, snapshot) {
-              MenuItemType menuItemType = MenuItemType.topRepositories;
-              if (snapshot.hasData) {
-                menuItemType = snapshot.data!;
-              }
-              return Column(
-                children: [
-                  DropdownSearch<MenuItemType>(
-                    enabled: true,
-                    items: MenuItemType.values,
-                    selectedItem: menuItemType,
-                    itemAsString: (item) => getMenuItemAsString(item),
-                    onChanged: (value) {
-                      homeController.updateMenuItem(value!);
-                    },
-                    dropdownDecoratorProps: const DropDownDecoratorProps(
-                      dropdownSearchDecoration: InputDecoration(
-                        label: Text('Search By'),
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
+/*showPopUpMenu(BuildContext context, Offset offset) async {
+  final screenSize = MediaQuery.of(context).size;
+  double left = offset.dx;
+  double top = offset.dy;
+  double right = screenSize.width - offset.dx;
+  double bottom = screenSize.height - offset.dy;
 
-                ],
-              );
-            },
-          ),
-        ],
+  await showMenu<HelpSupportType>(
+    context: context,
+    position: RelativeRect.fromLTRB(left, top, right, bottom),
+    items: HelpSupportType.values
+        .map((HelpSupportType helpSupportType) =>
+        PopupMenuItem<HelpSupportType>(
+          value: helpSupportType,
+          child: Text(getHelpSupportString(helpSupportType)),
+        ))
+        .toList(),
+  ).then((HelpSupportType period) {
+    if (period == HelpSupportType.TROUBLE_SHOOTING) {
+      Navigator.of(context).pushNamed(
+        CoreRoutes.troubleShootScreen,
       );
-    },
-  );
-}
+    }
+
+    if (period == HelpSupportType.FAQ) {
+      Navigator.of(context).pushNamed(
+        CoreRoutes.frequentlyAskQuestionScreen,
+      );
+    }
+  });
+}*/
