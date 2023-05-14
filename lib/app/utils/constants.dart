@@ -604,7 +604,7 @@ Map<int, Color> primaryColorMap = {
   800: const Color.fromRGBO(128, 0, 128, .9),
   900: const Color.fromRGBO(128, 0, 128, 1),
 };
-const primaryColor = Color(0xff171515);
+const primaryColor = Color(0xFF0DB85C);
 const primaryTextColor = Color(0xff002540);
 
 const green = Color(0xFF0DB85C);

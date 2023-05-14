@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'base_page_screen.dart';
 import 'subscription_handler.dart';
 
-abstract class BaseScreen<Page extends BasePageScreen>
+abstract class BaseState<Page extends BasePageScreen>
     extends BasePageScreenState<Page> with SubscriptionHandler {
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
