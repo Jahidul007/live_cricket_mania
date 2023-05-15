@@ -23,3 +23,10 @@ $ flutter run
 ```
 https://rapidapi.com/sportcontentapi/api/cricket-live-data/
 ```
+
+### Heres is some screenshots 
+
+Home Screen             |  Fixtures |Series |Results |Scorecard
+:-------------------------:|:-------------------------: |:-------------------------: |:-------------------------: |:-------------------------:
+![Simulator Screen Shot - iPhone 14 Pro - 2023-05-15 at 08 48 13](https://github.com/Jahidul007/live_cricket_mania/assets/26745548/b057bae1-e02c-48f7-a29c-c994ef20f697)| ![Simulator Screen Shot - iPhone 14 Pro - 2023-05-15 at 08 48 23](https://github.com/Jahidul007/live_cricket_mania/assets/26745548/4eca9eea-25d3-4a2c-a595-f30b89d5854f)| ![Simulator Screen Shot - iPhone 14 Pro - 2023-05-15 at 08 48 30](https://github.com/Jahidul007/live_cricket_mania/assets/26745548/5e009eb5-a382-40b5-b0ea-7131af168263)| ![Simulator Screen Shot - iPhone 14 Pro - 2023-05-15 at 08 48 36](https://github.com/Jahidul007/live_cricket_mania/assets/26745548/7855c377-0696-428c-820d-57ab463a1407)  | ![Simulator Screen Shot - iPhone 14 Pro - 2023-05-15 at 08 48 45](https://github.com/Jahidul007/live_cricket_mania/assets/26745548/1f5a4bb2-b183-4b86-ae26-b69692914e7b)
+
