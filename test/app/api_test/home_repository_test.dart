@@ -38,7 +38,7 @@ void main() {
         statusCode: 200,
       );
 
-      when(() => _tDio.post(baseUrl, data: any))
+      when(() => _tDio.get(baseUrl))
           .thenAnswer((realInvocation) async => response);
 
       var response1 = await _tHomeRepository.getAllSeries()
