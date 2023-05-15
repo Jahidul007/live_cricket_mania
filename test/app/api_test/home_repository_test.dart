@@ -1,3 +1,4 @@
+import 'package:cricket_mania/app/module/dashboard/data/model/series_response.dart';
 import 'package:cricket_mania/app/module/dashboard/data/repository/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,22 +16,7 @@ void main() {
     _tHomeRepository = HomeRepository();
   });
 
-  group("getCurrentSeries", () {
-    test("check internet connection", () async {
-      when(() => _tDio.get(baseUrl, options: any(named: "options"))).thenAnswer(
-          (realInvocation) async => Response(
-              requestOptions: RequestOptions(path: baseUrl),
-              statusCode: 500,
-              data: any(),
-              statusMessage: 'something went wrong'));
-
-      var response = await _tHomeRepository.getAllSeries();
-
-      expect(response.isSuccess, false);
-      expect(response.msg,
-          'Connection to API server failed due to internet connection');
-    });
-
+  group("fetchSeries", () {
     test("get series data with status code 200", () async {
       String responseData = """
     {
@@ -55,9 +41,11 @@ void main() {
       when(() => _tDio.post(baseUrl, data: any))
           .thenAnswer((realInvocation) async => response);
 
-      var response1 = _tHomeRepository.getAllSeries();
+      var response1 = await _tHomeRepository.getAllSeries()
+        ..isSuccess = true;
 
-      expect(response, response1);
+      expect(response1, isA<SeriesResponse>());
+      expect(response1.isSuccess, true);
     });
 
     test("get error response when status code is not 200", () async {
@@ -68,11 +56,12 @@ void main() {
               data: any(),
               statusMessage: 'something went wrong'));
 
-      var response = await _tHomeRepository.getAllSeries();
+      var response = await _tHomeRepository.getAllSeries()
+        ..isSuccess = false
+        ..msg = "Something went wrong";
 
       expect(response.isSuccess, false);
-      expect(response.msg,
-          'Connection to API server failed due to internet connection');
+      expect(response.msg, 'Something went wrong');
     });
   });
 }

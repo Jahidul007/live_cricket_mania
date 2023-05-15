@@ -32,7 +32,7 @@ class HomeRepository extends BaseRepository {
           "/series",
         );
 
-        return SeriesResponse.fromJson(response.data);
+        return SeriesResponse.fromJson(response.data)..isSuccess;
       },
       (message, errorType) async {
         return SeriesResponse.responseWithError(message, errorType);
