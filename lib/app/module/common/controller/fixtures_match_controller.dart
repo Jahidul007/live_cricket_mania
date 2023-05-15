@@ -36,6 +36,17 @@ mixin FixturesMatchesMixin on BaseController {
     _activePageController.sink.add(val);
   }
 
+  final _fromDateController = BehaviorSubject<DateTime>();
+
+  Stream<DateTime> get fromDate => _fromDateController.stream;
+
+  DateTime selectedFromDate = DateTime.now();
+
+  void updateFromDate(DateTime dateTime) {
+    _fromDateController.sink.add(dateTime);
+    selectedFromDate = dateTime;
+  }
+
   @override
   void dispose() {
     _fixturesMatchesController.close();
