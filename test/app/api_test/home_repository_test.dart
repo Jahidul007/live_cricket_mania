@@ -1,7 +1,9 @@
+import 'package:cricket_mania/app/module/common/data/model/match_info_response.dart';
 import 'package:cricket_mania/app/module/dashboard/data/model/series_response.dart';
 import 'package:cricket_mania/app/module/dashboard/data/repository/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockDioClient extends Mock implements Dio {}
@@ -64,4 +66,45 @@ void main() {
       expect(response.msg, 'Something went wrong');
     });
   });
+  
+  group("fetchFixtures", () { 
+    
+    test("fetch current date fixtures", () async{
+      var response = Response(
+        requestOptions: RequestOptions(path: baseUrl),
+        data: any,
+        statusCode: 200,
+      );
+
+      when(() => _tDio.get(baseUrl))
+          .thenAnswer((realInvocation) async => response);
+
+      String currentDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
+      var response1 = await _tHomeRepository.getFixtureMatches(dateTime: currentDate)
+        ..isSuccess = true;
+
+      expect(response1, isA<MatchInfoResponse>());
+      expect(response1.isSuccess, true);
+    });
+
+    test("get error response when date time goes wrong format", () async {
+      when(() => _tDio.get(baseUrl, options: any(named: "options"))).thenAnswer(
+              (realInvocation) async => Response(
+              requestOptions: RequestOptions(path: baseUrl),
+              statusCode: 500,
+              data: any(),
+              statusMessage: 'something went wrong'));
+      String currentDate = DateFormat("yyyy-MMM-dd").format(DateTime.now());
+
+      var response = await _tHomeRepository.getFixtureMatches(dateTime: currentDate)
+        ..isSuccess = false
+        ..msg = "Something went wrong";
+
+      expect(response.isSuccess, false);
+      expect(response.msg, 'Something went wrong');
+    });
+
+  });
+
 }
