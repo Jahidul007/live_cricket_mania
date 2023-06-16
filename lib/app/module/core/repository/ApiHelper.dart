@@ -41,6 +41,125 @@ class ApiBaseHelper with HeaderProvider {
     return responseJson;
   }
 
+  Future<dynamic> post(String url,
+      {dynamic requestBody,
+      Map<String, dynamic>? queryParameters,
+      String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode);
+    try {
+      var response = await _dio.post("$_baseUrl$url",
+          options: _option,
+          data: requestBody ?? {},
+          queryParameters: queryParameters);
+
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> put(String url,
+      {dynamic requestBody,
+      Map<String, dynamic>? queryParameters,
+      String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode);
+    try {
+      var response = await _dio.put("$_baseUrl$url",
+          options: _option,
+          data: requestBody ?? {},
+          queryParameters: queryParameters);
+
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> patch(String url,
+      {dynamic requestBody, String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode);
+    try {
+      var response = await _dio.patch("$_baseUrl$url",
+          options: _option, data: requestBody);
+
+      responseJson = response;
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> delete(String url,
+      {dynamic requestBody, String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode);
+    try {
+      var response = await _dio.delete("$_baseUrl$url",
+          options: _option, data: jsonEncode(requestBody));
+
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> fileUpload(String url,
+      {dynamic requestBody,
+      Map<String, dynamic>? queryParameters,
+      String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode);
+    try {
+      var response = await _dio.post("$_baseUrl$url",
+          options: _option,
+          queryParameters: queryParameters,
+          data: requestBody);
+
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
+  Future<dynamic> fileDownload(String url,
+      {dynamic requestBody,
+      Map<String, dynamic>? queryParameters,
+      String? versionCode}) async {
+    dynamic responseJson;
+    final _option = await getHeaders(versionCode: versionCode, timeZone: true)
+      ..responseType = ResponseType.bytes
+      ..followRedirects = false
+      ..validateStatus = (status) {
+        return status! < 500;
+      };
+
+    try {
+      Response response = await _dio.get(
+        url,
+        options: _option,
+        queryParameters: queryParameters,
+      );
+      return response;
+    } on SocketException {
+      _handleSocketException();
+    }
+
+    return responseJson;
+  }
+
   Future<dynamic> getLocalJson(String path) async {
     String localJson = await rootBundle.loadString(path);
     Map<String, dynamic> response = await jsonDecode(localJson);
