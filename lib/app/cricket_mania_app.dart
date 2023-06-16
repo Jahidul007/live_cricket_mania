@@ -46,7 +46,7 @@ class _CricketManiaAppState extends State<CricketManiaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: _navigatorKey,
-      title: 'Wallet',
+      title: 'Cricket Mania',
       supportedLocales: const [
         Locale('en', ''), // English, no country code
       ],

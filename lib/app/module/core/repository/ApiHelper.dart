@@ -48,16 +48,16 @@ class ApiBaseHelper with HeaderProvider {
   }
 }
 
-class FetchDataException extends WalletAppException {
+class FetchDataException extends CricketManiaAppException {
   FetchDataException(String? message)
       : super(message!, "Error During Communication: ");
 }
 
-class WalletAppException implements Exception {
+class CricketManiaAppException implements Exception {
   final String _message;
   final String _prefix;
 
-  WalletAppException(this._message, this._prefix);
+  CricketManiaAppException(this._message, this._prefix);
 
   @override
   String toString() {
